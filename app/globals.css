@@ -8,6 +8,8 @@
   --danger: #e7472e;
   --success: #177a50;
   --line: rgba(17, 17, 15, 0.18);
+  --font-display: 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 }
 
 * {
@@ -22,7 +24,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-display);
 }
 
 a {
