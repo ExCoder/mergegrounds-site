@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ContentShell } from '../../content-shell';
 
 export const metadata: Metadata = {
@@ -28,21 +29,21 @@ export default function GettingStarted() {
         </li>
       </ul>
 
-      <h2>1. Clone the control plane</h2>
+      <h2>1. Clone the reviewed release</h2>
       <pre>
-        <code>git clone https://github.com/ExCoder/mergegrounds.git</code>
+        <code>{`git clone --branch v1.0.0 --depth 1 \\
+  https://github.com/ExCoder/mergegrounds.git`}</code>
       </pre>
       <p>
+        Compare the release archive against its published checksums before use.
         Keep the clone intact: the skill, runner, policy schemas, workflows, and
         reference material form one versioned control plane.
       </p>
 
       <h2>2. Preview against your repository</h2>
       <pre>
-        <code>
-          python3 -I /absolute/path/to/mergegrounds/scripts/bootstrap.py \
-          --target /absolute/path/to/your-repository
-        </code>
+        <code>{`python3 -I /absolute/path/to/mergegrounds/scripts/bootstrap.py \\
+  --target /absolute/path/to/your-repository`}</code>
       </pre>
       <p>
         Preview reports files it would create and conflicts it would refuse to
@@ -51,10 +52,9 @@ export default function GettingStarted() {
 
       <h2>3. Review, then apply</h2>
       <pre>
-        <code>
-          python3 -I /absolute/path/to/mergegrounds/scripts/bootstrap.py \
-          --target /absolute/path/to/your-repository \ --apply
-        </code>
+        <code>{`python3 -I /absolute/path/to/mergegrounds/scripts/bootstrap.py \\
+  --target /absolute/path/to/your-repository \\
+  --apply`}</code>
       </pre>
       <p>
         Replace the deliberate ownership placeholders, inspect detected
@@ -64,11 +64,9 @@ export default function GettingStarted() {
 
       <h2>4. Seal and verify</h2>
       <pre>
-        <code>
-          python3 -I scripts/guardian.py seal --write python3 -I
-          scripts/guardian.py doctor python3 -I scripts/guardian.py verify-repo
-          --strict
-        </code>
+        <code>{`python3 -I scripts/mergegrounds.py seal --write
+python3 -I scripts/mergegrounds.py doctor
+python3 -I scripts/mergegrounds.py verify-repo --strict`}</code>
       </pre>
       <p>
         Commit the reviewed controls and their seal separately. The full profile
@@ -82,6 +80,15 @@ export default function GettingStarted() {
         required checks bound to that verifier identity, protected owners, and a
         ruleset with no alternate write path. Repository files alone cannot
         prove those settings exist.
+      </p>
+      <p>
+        Start from the separately versioned{' '}
+        <a href="https://github.com/ExCoder/mergegrounds-verifier">
+          reference verifier
+        </a>{' '}
+        and its <Link href="/schemas">canonical schemas</Link>. It is a decision
+        core, not a hosted trust boundary; operators must supply independent
+        administration, identities, isolation, and protected GitHub settings.
       </p>
 
       <aside className="prose-callout">

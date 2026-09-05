@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/docs/ai-system-assurance',
     '/research',
     '/security',
+    '/schemas',
     '/privacy',
     '/community',
   ];
