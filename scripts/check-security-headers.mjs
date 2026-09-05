@@ -24,6 +24,15 @@ const routes = [
   '/robots.txt',
   '/sitemap.xml',
 ];
+const staticAssets = [
+  '/favicon.svg',
+  '/og.png',
+  '/schemas/decision-v1.schema.json',
+  '/schemas/evidence-v1.schema.json',
+  '/schemas/policy-v1.schema.json',
+  '/schemas/subject-v1.schema.json',
+  '/schemas/waiver-v1.schema.json',
+];
 const expectedHeaders = new Map([
   [
     'content-security-policy',
@@ -113,7 +122,17 @@ async function stopServer() {
 
 try {
   await waitUntilReady();
-  for (const route of routes) {
+  const homeResponse = await fetch(`${baseUrl}/`, {
+    signal: AbortSignal.timeout(5_000),
+  });
+  const homeHtml = await homeResponse.text();
+  const chunkPath = homeHtml.match(/src="(\/_next\/static\/[^"]+\.js)"/)?.[1];
+  if (!chunkPath) {
+    throw new Error('could not locate a production JavaScript chunk in /');
+  }
+
+  const checkedPaths = [...routes, ...staticAssets, chunkPath];
+  for (const route of checkedPaths) {
     const response = await fetch(`${baseUrl}${route}`, {
       redirect: 'error',
       signal: AbortSignal.timeout(5_000),
@@ -131,7 +150,7 @@ try {
     }
   }
   console.log(
-    `Verified ${expectedHeaders.size} security headers on ${routes.length} production routes.`,
+    `Verified ${expectedHeaders.size} security headers on ${checkedPaths.length} production routes and assets.`,
   );
 } finally {
   await stopServer();
