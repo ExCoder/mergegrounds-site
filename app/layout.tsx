@@ -26,7 +26,7 @@ const structuredData = {
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Cross-platform',
       description:
-        'Open-source, stack-agnostic, fail-closed admission control for AI-assisted code.',
+        'Open-source, multi-stack, fail-closed admission control for AI-assisted code.',
       url: 'https://mergegrounds.chawax.chatgpt.site/',
       downloadUrl: 'https://github.com/ExCoder/mergegrounds',
       license: 'https://www.apache.org/licenses/LICENSE-2.0',

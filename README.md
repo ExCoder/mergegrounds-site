@@ -2,7 +2,7 @@
 
 The public landing page and compact documentation site for
 [MergeGrounds](https://github.com/ExCoder/mergegrounds): open-source,
-stack-agnostic, fail-closed admission control for AI-assisted code.
+multi-stack, fail-closed admission control for AI-assisted code.
 
 ## Development
 
@@ -18,6 +18,7 @@ npm run dev
 ```bash
 npm run lint
 npm run build
+npm run check:headers
 npm audit --audit-level=high
 ```
 

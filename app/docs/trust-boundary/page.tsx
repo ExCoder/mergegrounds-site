@@ -14,7 +14,7 @@ export default function TrustBoundary() {
     <ContentShell
       eyebrow="DOCS / TRUST BOUNDARY"
       title="A change cannot judge itself."
-      description="The strongest guarantee comes from separating proposal, evidence production, admission, human approval, and release promotion."
+      description="The strongest assurance claim requires separating proposal, evidence production, admission, human approval, and release promotion."
     >
       <h2>The five identities</h2>
       <ol>

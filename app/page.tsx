@@ -135,7 +135,8 @@ export default function Home() {
             <p className="truth-line">
               <ShieldCheck aria-hidden="true" size={18} />
               No “100% safe” claims. Missing, stale, malformed, or self-graded
-              evidence can never become a pass.
+              evidence is denied by the documented controls instead of silently
+              passing.
             </p>
           </div>
 
@@ -178,7 +179,7 @@ export default function Home() {
 
         <div className="principle-strip" aria-label="Core principles">
           <span>MISSING ≠ PASS</span>
-          <span>THE PR CANNOT EDIT ITS OWN JUDGE</span>
+          <span>THE PR MUST NOT EDIT ITS OWN JUDGE</span>
           <span>BUILD ONCE · PROMOTE BY DIGEST</span>
         </div>
       </section>
