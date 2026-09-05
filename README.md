@@ -37,8 +37,12 @@ currently supported.
 `npm run check:runtime` starts the compiled Worker on an ephemeral loopback port
 and verifies the rendered CTAs, pinned clone, JSON-LD versions, route metadata,
 landmarks, branded 404, privacy retention disclosure, touch targets, and
-navigation contrast. Run it only after `npm run build`. The header check also
-runs under a hostile `PATH` Git shim and fails if that shim is consulted.
+navigation contrast. It also executes the rendered empty-directory preview shell
+shape against a self-contained, no-write bootstrap fixture. That check validates
+the compiled command and target-safety behavior; the core repository's own test
+suite validates the real bootstrap implementation. Run the runtime check only
+after `npm run build`. The header check also runs under a hostile `PATH` Git shim
+and fails if that shim is consulted.
 
 The application is built with Vinext and the OpenAI Sites Vite plugin for a
 Cloudflare Workers-compatible deployment.

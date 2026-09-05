@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { execFile, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createServer } from 'node:net';
-import { mkdir, mkdtemp, readdir, rm } from 'node:fs/promises';
+import { mkdir, mkdtemp, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -46,8 +46,32 @@ async function assertEmptyDirectoryPreviewExecutes(command) {
     join(tmpdir(), 'mergegrounds-empty-preview-'),
   );
   const targetDirectory = join(fixtureDirectory, 'new-empty-project');
-  const coreDirectory = join(dirname(repositoryDirectory), 'mergegrounds');
+  const coreDirectory = join(fixtureDirectory, 'mergegrounds-fixture');
+  const scriptsDirectory = join(coreDirectory, 'scripts');
   await mkdir(targetDirectory);
+  await mkdir(scriptsDirectory, { recursive: true });
+  await writeFile(
+    join(scriptsDirectory, 'bootstrap.py'),
+    [
+      'import argparse',
+      'import pathlib',
+      '',
+      'parser = argparse.ArgumentParser()',
+      "parser.add_argument('--target', required=True)",
+      "parser.add_argument('--allow-non-git', action='store_true')",
+      "parser.add_argument('--apply', action='store_true')",
+      'arguments = parser.parse_args()',
+      'target = pathlib.Path(arguments.target)',
+      "if arguments.apply: raise SystemExit('fixture refuses --apply')",
+      "if not arguments.allow_non_git: raise SystemExit('missing --allow-non-git')",
+      "if not target.is_dir(): raise SystemExit('target must be a directory')",
+      "if any(target.iterdir()): raise SystemExit('target must be empty')",
+      "print('Plan: create=1')",
+      "print('Dry run only. Review conflicts, then rerun with --apply.')",
+      '',
+    ].join('\n'),
+    { encoding: 'utf8', mode: 0o600 },
+  );
 
   try {
     assert.equal(
@@ -66,7 +90,7 @@ async function assertEmptyDirectoryPreviewExecutes(command) {
         '/absolute/path/to/new-empty-project',
         shellQuote(targetDirectory),
       );
-    const { stdout } = await execFileAsync(
+    const { stderr, stdout } = await execFileAsync(
       '/bin/sh',
       ['-eu', '-c', executableCommand],
       {
@@ -84,9 +108,15 @@ async function assertEmptyDirectoryPreviewExecutes(command) {
     );
     assert.match(
       stdout,
+      /^Plan: create=1$/mu,
+      'compiled empty-directory preview must execute the fixture',
+    );
+    assert.match(
+      stdout,
       /Dry run only/u,
       'compiled empty-directory preview must report Dry run only',
     );
+    assert.equal(stderr, '', 'compiled empty-directory preview wrote stderr');
     assert.deepEqual(
       await readdir(targetDirectory),
       [],
@@ -265,7 +295,7 @@ async function run() {
           ),
       },
       {
-        name: 'compiled empty-directory preview executes without writes',
+        name: 'compiled empty-directory preview shell executes without writes',
         verify: async () => {
           const { emptyPreviewCommand } = assertGettingStartedRuntimeContract(
             pages.get('/docs/getting-started'),

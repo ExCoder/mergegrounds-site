@@ -1420,6 +1420,28 @@ check('CI runs the compiled runtime contract after the build', async () => {
 });
 
 check(
+  'runtime preview execution is self-contained in a clean checkout',
+  async () => {
+    const runtimeCheck = await readSource('scripts/check-runtime-contract.mjs');
+    assert.doesNotMatch(
+      runtimeCheck,
+      /join\(dirname\(repositoryDirectory\), ['"]mergegrounds['"]\)/u,
+      'runtime check must not depend on a sibling core checkout',
+    );
+    assertMatches(
+      runtimeCheck,
+      /join\(fixtureDirectory, ['"]mergegrounds-fixture['"]\)/u,
+      'runtime check must create a private core fixture',
+    );
+    assertMatches(
+      runtimeCheck,
+      /writeFile\([\s\S]*?bootstrap\.py[\s\S]*?--allow-non-git/u,
+      'runtime check must install a constrained bootstrap fixture',
+    );
+  },
+);
+
+check(
   'security header verification runs under a hostile PATH Git shim',
   async () => {
     const packageMetadata = JSON.parse(await readSource('package.json'));
