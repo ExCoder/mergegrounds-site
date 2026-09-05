@@ -1,17 +1,5 @@
 import type { Metadata } from 'next';
-import { Bricolage_Grotesque, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
-
-const display = Bricolage_Grotesque({
-  variable: '--font-display',
-  subsets: ['latin'],
-});
-
-const mono = IBM_Plex_Mono({
-  variable: '--font-mono',
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-});
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -94,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${mono.variable}`}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
