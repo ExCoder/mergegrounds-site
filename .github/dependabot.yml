@@ -10,9 +10,15 @@ updates:
       # Re-evaluate when upstream restores it or documents an equivalent rule.
       - dependency-name: oxlint
         versions:
+          - 1.80.0
           - 1.81.0
       # The site builds and runs on Node 22; keep its type model on the same LTS.
       - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-major
+      # vinext is validated against TypeScript 5.x; upgrade only after an
+      # explicit framework compatibility review, not an automated major bump.
+      - dependency-name: typescript
         update-types:
           - version-update:semver-major
     groups:
