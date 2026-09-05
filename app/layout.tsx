@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { SITE_VERSION } from './site-build-identity';
 
+const CORE_VERSION = '1.0.0';
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -17,6 +19,7 @@ const structuredData = {
       '@id': 'https://mergegrounds.chawax.chatgpt.site/#website',
       name: 'MergeGrounds',
       url: 'https://mergegrounds.chawax.chatgpt.site/',
+      version: SITE_VERSION,
       publisher: {
         '@id': 'https://mergegrounds.chawax.chatgpt.site/#organization',
       },
@@ -26,11 +29,12 @@ const structuredData = {
       name: 'MergeGrounds',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Cross-platform',
-      softwareVersion: SITE_VERSION,
+      softwareVersion: CORE_VERSION,
       description:
         'Open-source, multi-stack, fail-closed admission control for AI-assisted code.',
-      url: 'https://mergegrounds.chawax.chatgpt.site/',
-      downloadUrl: 'https://github.com/ExCoder/mergegrounds',
+      url: 'https://github.com/ExCoder/mergegrounds',
+      downloadUrl:
+        'https://github.com/ExCoder/mergegrounds/releases/tag/v1.0.0',
       license: 'https://www.apache.org/licenses/LICENSE-2.0',
       offers: {
         '@type': 'Offer',
@@ -85,6 +89,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <a className="skip-link" href="#main-content">
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

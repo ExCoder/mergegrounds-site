@@ -1,26 +1,27 @@
-import { execFileSync, spawn } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { resolveSourceIdentity } from './source-identity.mjs';
 
-const port = Number.parseInt(process.env.MERGEGROUNDS_TEST_PORT ?? '8797', 10);
-if (!Number.isSafeInteger(port) || port < 1024 || port > 65535) {
-  throw new Error(
-    'MERGEGROUNDS_TEST_PORT must be an integer from 1024 to 65535',
-  );
+function configuredPort(name, fallback) {
+  const port = Number.parseInt(process.env[name] ?? fallback, 10);
+  if (!Number.isSafeInteger(port) || port < 1024 || port > 65535) {
+    throw new Error(`${name} must be an integer from 1024 to 65535`);
+  }
+  return port;
 }
 
+const port = configuredPort('MERGEGROUNDS_TEST_PORT', '8797');
+const inspectorPort = configuredPort('MERGEGROUNDS_INSPECTOR_PORT', '9232');
 const baseUrl = `http://127.0.0.1:${port}`;
 const packageMetadata = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8'),
 );
-const sourceCommit = execFileSync('git', ['rev-parse', '--verify', 'HEAD'], {
-  encoding: 'utf8',
-}).trim();
-const sourceDirty =
-  execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], {
-    encoding: 'utf8',
-  }).trim().length > 0;
+const repositoryDirectory = fileURLToPath(new URL('..', import.meta.url));
+const { commit: sourceCommit, dirty: sourceDirty } = resolveSourceIdentity({
+  repositoryDirectory,
+});
 const routes = [
   '/',
   '/community',
@@ -83,6 +84,8 @@ const server = spawn(
     '127.0.0.1',
     '--port',
     String(port),
+    '--inspector-port',
+    String(inspectorPort),
   ],
   {
     env: { ...process.env, NO_COLOR: '1' },

@@ -16,11 +16,29 @@ npm run dev
 ## Verification
 
 ```bash
+npm run check:launch
 npm run lint
+npm run check:schemas
 npm run build
+npm run check:runtime
 npm run check:headers
-npm audit --audit-level=high
+npm audit --omit=dev --audit-level=high
 ```
+
+Build identity comes from one sanitized repository-status invocation using the
+root-owned, non-writable `/usr/bin/git`; `PATH`, Git configuration environment,
+hooks, and filesystem monitors cannot select the source identity. GitHub Actions
+CI requires `GITHUB_SHA` to match the actual `HEAD`. An explicit promotion also
+requires `MERGEGROUNDS_SITE_COMMIT` to match `HEAD`. CI and promotion builds
+reject dirty worktrees; local builds remain available and visibly mark dirty
+source. Environments without the reviewed `/usr/bin/git` fail closed and are not
+currently supported.
+
+`npm run check:runtime` starts the compiled Worker on an ephemeral loopback port
+and verifies the rendered CTAs, pinned clone, JSON-LD versions, route metadata,
+landmarks, branded 404, privacy retention disclosure, touch targets, and
+navigation contrast. Run it only after `npm run build`. The header check also
+runs under a hostile `PATH` Git shim and fails if that shim is consulted.
 
 The application is built with Vinext and the OpenAI Sites Vite plugin for a
 Cloudflare Workers-compatible deployment.

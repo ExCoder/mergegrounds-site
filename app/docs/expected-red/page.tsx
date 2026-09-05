@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
 import { ContentShell } from '../../content-shell';
+import { createPageMetadata } from '../../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/docs/expected-red',
   title: 'Why MergeGrounds starts red',
   description:
     'Understand the deliberate activation failures that prevent an unconfigured security skeleton from being mistaken for enforcement.',
-  alternates: { canonical: '/docs/expected-red' },
-};
+});
 
 export default function ExpectedRed() {
   return (

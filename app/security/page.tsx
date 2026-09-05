@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
 import { ContentShell } from '../content-shell';
+import { createPageMetadata } from '../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/security',
   title: 'MergeGrounds security',
   description:
     'Threat model, responsible disclosure path, supported release policy, and the explicit limits of MergeGrounds.',
-  alternates: { canonical: '/security' },
-};
+});
 
 export default function Security() {
   return (

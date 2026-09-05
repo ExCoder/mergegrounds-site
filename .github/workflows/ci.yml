@@ -34,6 +34,9 @@ jobs:
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
 
+      - name: Verify launch contract
+        run: npm run check:launch
+
       - name: Lint
         run: npm run lint
 
@@ -42,6 +45,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Verify runtime launch contract
+        run: npm run check:runtime
 
       - name: Verify production security headers
         run: npm run check:headers

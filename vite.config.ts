@@ -1,10 +1,11 @@
 import { sites } from '@openai/sites-vite-plugin';
 import tailwindcss from '@tailwindcss/postcss';
-import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import vinext from 'vinext';
 import { defineConfig } from 'vite';
 import hostingConfig from './.openai/hosting.json' with { type: 'json' };
 import packageMetadata from './package.json' with { type: 'json' };
+import { resolveSourceIdentity } from './scripts/source-identity.mjs';
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   '00000000-0000-4000-8000-000000000000';
@@ -13,21 +14,10 @@ const { d1, r2 } = hostingConfig;
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
-const sourceCommit =
-  process.env.MERGEGROUNDS_SITE_COMMIT ??
-  execFileSync('git', ['rev-parse', '--verify', 'HEAD'], {
-    encoding: 'utf8',
-  }).trim();
-const sourceDirty =
-  execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], {
-    encoding: 'utf8',
-  }).trim().length > 0;
-
-if (!/^[0-9a-f]{40}$/.test(sourceCommit)) {
-  throw new Error(
-    'MERGEGROUNDS_SITE_COMMIT or git rev-parse HEAD must provide a full lowercase Git commit',
-  );
-}
+const repositoryDirectory = fileURLToPath(new URL('.', import.meta.url));
+const { commit: sourceCommit, dirty: sourceDirty } = resolveSourceIdentity({
+  repositoryDirectory,
+});
 
 const localBindingConfig = {
   main: 'vinext/server/fetch-handler',
