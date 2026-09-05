@@ -1,0 +1,7 @@
+* @ExCoder
+/.github/ @ExCoder
+/.openai/ @ExCoder
+/app/ @ExCoder
+/package.json @ExCoder
+/package-lock.json @ExCoder
+/vite.config.ts @ExCoder
