@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ContentShell } from '../content-shell';
 
 export const metadata: Metadata = {
@@ -75,6 +76,20 @@ export default function Research() {
         Pages that compare tools include a checked date and link to primary
         documentation. Benchmarks must publish fixtures, versions, raw results,
         and limitations before they become marketing claims.
+      </p>
+
+      <h2>AI-enabled products need another evidence plane</h2>
+      <p>
+        When a model, retrieval pipeline, or agent is shipped behavior, source
+        checks alone cannot validate stochastic output. Our public assurance
+        guide translates research on unfaithful reasoning, delivery speed, RAG,
+        long context, benchmark contamination, and fine-tuning regression into
+        falsifiable engineering controls.
+      </p>
+      <p>
+        <Link href="/docs/ai-system-assurance">
+          Read the AI system assurance guide
+        </Link>
       </p>
     </ContentShell>
   );

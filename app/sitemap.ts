@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/docs/getting-started',
     '/docs/expected-red',
     '/docs/trust-boundary',
+    '/docs/ai-system-assurance',
     '/research',
     '/security',
     '/community',
