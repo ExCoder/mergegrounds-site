@@ -10,6 +10,7 @@ updates:
       # Re-evaluate when upstream restores it or documents an equivalent rule.
       - dependency-name: oxlint
         versions:
+          - 1.79.0
           - 1.80.0
           - 1.81.0
       # The site builds and runs on Node 22; keep its type model on the same LTS.
