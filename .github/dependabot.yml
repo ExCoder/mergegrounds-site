@@ -5,6 +5,16 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # 1.81.0 removed the react/react-compiler rule used by the strict profile.
+      # Re-evaluate when upstream restores it or documents an equivalent rule.
+      - dependency-name: oxlint
+        versions:
+          - 1.81.0
+      # The site builds and runs on Node 22; keep its type model on the same LTS.
+      - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-major
     groups:
       site-runtime:
         patterns:

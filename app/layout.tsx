@@ -59,6 +59,9 @@ export const metadata: Metadata = {
   title: 'MergeGrounds — Every merge needs evidence',
   description:
     'Open-source, fail-closed admission control for AI-assisted code. Design contracts, mutation testing, security gates, and exact-revision evidence.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     url: '/',
