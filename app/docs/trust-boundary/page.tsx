@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ContentShell } from '../../content-shell';
 
 export const metadata: Metadata = {
@@ -70,6 +71,15 @@ export default function TrustBoundary() {
         hardened workflow templates. Maximum assurance exists only after the
         external verifier, identities, rulesets, isolation, and release path are
         deployed and independently verified in your environment.
+      </p>
+      <p>
+        Inspect the separately versioned{' '}
+        <a href="https://github.com/ExCoder/mergegrounds-verifier">
+          reference verifier
+        </a>{' '}
+        and the five <Link href="/schemas">canonical JSON Schemas</Link>. The
+        reference implementation validates the decision contract; it does not
+        create the independent operational boundary on your behalf.
       </p>
 
       <aside className="prose-callout">
