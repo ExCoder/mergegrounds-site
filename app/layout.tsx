@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { SITE_VERSION } from './site-build-identity';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -25,6 +26,7 @@ const structuredData = {
       name: 'MergeGrounds',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Cross-platform',
+      softwareVersion: SITE_VERSION,
       description:
         'Open-source, multi-stack, fail-closed admission control for AI-assisted code.',
       url: 'https://mergegrounds.chawax.chatgpt.site/',

@@ -906,6 +906,16 @@ footer > p {
     monospace;
 }
 
+.site-build-identity a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 253, 246, 0.3);
+  text-underline-offset: 3px;
+}
+
+.site-build-identity a:hover {
+  color: var(--signal);
+}
+
 footer > div {
   justify-self: end;
   display: flex;
@@ -1183,7 +1193,13 @@ footer > div {
   }
 
   footer > p {
-    display: none;
+    justify-self: end;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  footer > div {
+    grid-column: 1 / -1;
   }
 
   .content-nav {
@@ -1346,8 +1362,14 @@ footer > div {
   }
 
   footer > div {
+    grid-column: auto;
     justify-self: start;
     flex-wrap: wrap;
+  }
+
+  footer > p {
+    justify-self: start;
+    text-align: left;
   }
 
   .content-hero,

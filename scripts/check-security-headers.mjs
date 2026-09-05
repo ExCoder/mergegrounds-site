@@ -1,5 +1,6 @@
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const port = Number.parseInt(process.env.MERGEGROUNDS_TEST_PORT ?? '8797', 10);
@@ -10,6 +11,16 @@ if (!Number.isSafeInteger(port) || port < 1024 || port > 65535) {
 }
 
 const baseUrl = `http://127.0.0.1:${port}`;
+const packageMetadata = JSON.parse(
+  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
+);
+const sourceCommit = execFileSync('git', ['rev-parse', '--verify', 'HEAD'], {
+  encoding: 'utf8',
+}).trim();
+const sourceDirty =
+  execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], {
+    encoding: 'utf8',
+  }).trim().length > 0;
 const routes = [
   '/',
   '/community',
@@ -126,6 +137,13 @@ try {
     signal: AbortSignal.timeout(5_000),
   });
   const homeHtml = await homeResponse.text();
+  if (!homeHtml.includes(`v${packageMetadata.version}`)) {
+    throw new Error(`/: missing site version v${packageMetadata.version}`);
+  }
+  const sourceIdentity = `${sourceCommit.slice(0, 12)}${sourceDirty ? '-dirty' : ''}`;
+  if (!homeHtml.includes(sourceIdentity)) {
+    throw new Error(`/: missing source identity ${sourceIdentity}`);
+  }
   const chunkPath = homeHtml.match(/src="(\/_next\/static\/[^"]+\.js)"/)?.[1];
   if (!chunkPath) {
     throw new Error('could not locate a production JavaScript chunk in /');

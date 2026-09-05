@@ -12,6 +12,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import Link from 'next/link';
+import { SiteBuildIdentity } from './site-build-identity';
 
 const checks = [
   { label: 'Exact revision bound', state: 'PASS', tone: 'pass' },
@@ -435,7 +436,7 @@ export default function Home() {
           <span className="brand-mark">MG//</span>
           <span>MergeGrounds</span>
         </a>
-        <p>Every merge needs evidence.</p>
+        <SiteBuildIdentity />
         <div>
           <Link href="/docs/getting-started">Docs</Link>
           <Link href="/research">Research</Link>
