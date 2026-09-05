@@ -51,6 +51,7 @@ export function ContentShell({
           <Link href="/docs/getting-started">Docs</Link>
           <Link href="/research">Research</Link>
           <Link href="/security">Security</Link>
+          <Link href="/privacy">Privacy</Link>
           <Link href="/community">Community</Link>
         </div>
       </footer>
