@@ -37,5 +37,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Verify canonical schema bytes
+        run: npm run check:schemas
+
       - name: Build
         run: npm run build

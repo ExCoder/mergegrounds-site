@@ -15,6 +15,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
+    "check:schemas": "node scripts/check-schema-bytes.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },
