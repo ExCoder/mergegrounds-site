@@ -439,6 +439,7 @@ export default function Home() {
           <Link href="/docs/getting-started">Docs</Link>
           <Link href="/research">Research</Link>
           <Link href="/security">Security</Link>
+          <Link href="/privacy">Privacy</Link>
           <a href="https://github.com/ExCoder/mergegrounds">GitHub</a>
         </div>
       </footer>
