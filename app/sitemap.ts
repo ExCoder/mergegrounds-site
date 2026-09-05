@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const origin = 'https://mergegrounds.flowy-bass-8622.chatgpt.site';
+const origin = 'https://mergegrounds.chawax.chatgpt.site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [

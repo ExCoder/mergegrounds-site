@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://mergegrounds.flowy-bass-8622.chatgpt.site/sitemap.xml',
+    sitemap: 'https://mergegrounds.chawax.chatgpt.site/sitemap.xml',
   };
 }

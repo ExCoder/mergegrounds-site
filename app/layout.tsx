@@ -18,19 +18,18 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://mergegrounds.flowy-bass-8622.chatgpt.site/#organization',
+      '@id': 'https://mergegrounds.chawax.chatgpt.site/#organization',
       name: 'MergeGrounds',
-      url: 'https://mergegrounds.flowy-bass-8622.chatgpt.site/',
+      url: 'https://mergegrounds.chawax.chatgpt.site/',
       sameAs: ['https://github.com/ExCoder/mergegrounds'],
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://mergegrounds.flowy-bass-8622.chatgpt.site/#website',
+      '@id': 'https://mergegrounds.chawax.chatgpt.site/#website',
       name: 'MergeGrounds',
-      url: 'https://mergegrounds.flowy-bass-8622.chatgpt.site/',
+      url: 'https://mergegrounds.chawax.chatgpt.site/',
       publisher: {
-        '@id':
-          'https://mergegrounds.flowy-bass-8622.chatgpt.site/#organization',
+        '@id': 'https://mergegrounds.chawax.chatgpt.site/#organization',
       },
     },
     {
@@ -40,7 +39,7 @@ const structuredData = {
       operatingSystem: 'Cross-platform',
       description:
         'Open-source, stack-agnostic, fail-closed admission control for AI-assisted code.',
-      url: 'https://mergegrounds.flowy-bass-8622.chatgpt.site/',
+      url: 'https://mergegrounds.chawax.chatgpt.site/',
       downloadUrl: 'https://github.com/ExCoder/mergegrounds',
       license: 'https://www.apache.org/licenses/LICENSE-2.0',
       offers: {
@@ -49,15 +48,14 @@ const structuredData = {
         priceCurrency: 'USD',
       },
       author: {
-        '@id':
-          'https://mergegrounds.flowy-bass-8622.chatgpt.site/#organization',
+        '@id': 'https://mergegrounds.chawax.chatgpt.site/#organization',
       },
     },
   ],
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mergegrounds.flowy-bass-8622.chatgpt.site'),
+  metadataBase: new URL('https://mergegrounds.chawax.chatgpt.site'),
   title: 'MergeGrounds — Every merge needs evidence',
   description:
     'Open-source, fail-closed admission control for AI-assisted code. Design contracts, mutation testing, security gates, and exact-revision evidence.',
