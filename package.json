@@ -1,6 +1,6 @@
 {
   "name": "mergegrounds-site",
-  "version": "0.1.0",
+  "version": "1.2.2",
   "private": true,
   "description": "The public website and documentation for MergeGrounds.",
   "license": "Apache-2.0",
@@ -15,7 +15,10 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
+    "check:launch": "node scripts/check-launch-contract.mjs",
+    "check:runtime": "node scripts/check-runtime-contract.mjs",
     "check:schemas": "node scripts/check-schema-bytes.mjs",
+    "check:headers": "node scripts/check-security-headers-path.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },

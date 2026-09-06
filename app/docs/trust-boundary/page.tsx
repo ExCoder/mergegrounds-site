@@ -1,20 +1,20 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentShell } from '../../content-shell';
+import { createPageMetadata } from '../../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/docs/trust-boundary',
   title: 'The MergeGrounds trust boundary',
   description:
     'Why a pull request must not control the policy, evidence producer, or identity used to decide its own admission.',
-  alternates: { canonical: '/docs/trust-boundary' },
-};
+});
 
 export default function TrustBoundary() {
   return (
     <ContentShell
       eyebrow="DOCS / TRUST BOUNDARY"
       title="A change cannot judge itself."
-      description="The strongest guarantee comes from separating proposal, evidence production, admission, human approval, and release promotion."
+      description="The strongest assurance claim requires separating proposal, evidence production, admission, human approval, and release promotion."
     >
       <h2>The five identities</h2>
       <ol>

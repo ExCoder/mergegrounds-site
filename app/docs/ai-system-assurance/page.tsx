@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentShell } from '../../content-shell';
+import { createPageMetadata } from '../../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/docs/ai-system-assurance',
   title: 'AI system assurance — MergeGrounds',
   description:
     'Evidence requirements for reasoning, retrieval, long context, benchmarks, fine-tuning, tools, and runtime change.',
-  alternates: { canonical: '/docs/ai-system-assurance' },
-};
+});
 
 export default function AiSystemAssurance() {
   return (

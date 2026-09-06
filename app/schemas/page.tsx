@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentShell } from '../content-shell';
+import { createPageMetadata } from '../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/schemas',
   title: 'MergeGrounds JSON Schemas',
   description:
     'Canonical Draft 2020-12 schemas for MergeGrounds subjects, policies, evidence, waivers, and admission decisions.',
-  alternates: { canonical: '/schemas' },
-};
+});
 
 const schemas = [
   [

@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentShell } from '../content-shell';
+import { createPageMetadata } from '../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/research',
   title: 'Research behind MergeGrounds',
   description:
     'Primary sources and explicit reasoning behind fail-closed admission control for AI-assisted software.',
-  alternates: { canonical: '/research' },
-};
+});
 
 export default function Research() {
   return (

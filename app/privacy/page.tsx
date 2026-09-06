@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
 import { ContentShell } from '../content-shell';
+import { createPageMetadata } from '../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/privacy',
   title: 'MergeGrounds privacy',
   description:
     'What the MergeGrounds documentation website collects, what GitHub receives when you follow a link, and how future changes will be disclosed.',
-  alternates: { canonical: '/privacy' },
-};
+});
 
 export default function Privacy() {
   return (
@@ -22,6 +22,28 @@ export default function Privacy() {
         The hosting infrastructure may process ordinary request metadata needed
         to deliver and protect the site, such as IP address, user agent, URL,
         timestamp, and security signals.
+      </p>
+
+      <h2>Cloudflare infrastructure and security cookies</h2>
+      <p>
+        The site is delivered through Cloudflare infrastructure. Depending on
+        the request and the security controls Cloudflare applies, Cloudflare may
+        set strictly necessary bot-management or challenge cookies such as{' '}
+        <code>__cf_bm</code> or <code>cf_clearance</code>. They support traffic
+        integrity and abuse prevention; MergeGrounds does not use them for
+        advertising or first-party analytics. Cloudflare documents that{' '}
+        <code>__cf_bm</code> expires after 30 minutes of continuous inactivity.
+        The <code>cf_clearance</code> duration follows the configured Cloudflare
+        Challenge Passage. Cloudflare creates and manages these cookies;
+        MergeGrounds does not control their creation, operation, or retention.
+      </p>
+      <p>
+        <a
+          href="https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/"
+          rel="noreferrer"
+        >
+          Cloudflare cookie documentation
+        </a>
       </p>
 
       <h2>Links to GitHub</h2>
@@ -45,7 +67,7 @@ export default function Privacy() {
         If accounts, analytics, hosted verification, or other data-collecting
         features are introduced, this page and the relevant repository
         documentation will be updated before that feature is presented as
-        available. Last updated: September 5, 2026.
+        available. Last updated: September 6, 2026.
       </p>
     </ContentShell>
   );

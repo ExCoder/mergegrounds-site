@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentShell } from '../content-shell';
+import { createPageMetadata } from '../page-metadata';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
+  path: '/community',
   title: 'MergeGrounds community',
   description:
     'Contribute adapters, failure fixtures, documentation, and evidence-led improvements to MergeGrounds.',
-  alternates: { canonical: '/community' },
-};
+});
 
 export default function Community() {
   return (
@@ -35,8 +35,8 @@ export default function Community() {
         <section>
           <h3>Improve the path</h3>
           <p>
-            Reduce time to first audit, clarify an error, or document a recovery
-            without weakening the underlying policy.
+            Reduce time to first demo and preview, clarify an error, or document
+            a recovery without weakening the underlying policy.
           </p>
         </section>
         <section>
@@ -75,7 +75,7 @@ export default function Community() {
           </a>
         </li>
         <li>
-          <Link href="/docs/getting-started">Run the read-only audit</Link>
+          <Link href="/docs/getting-started">Run the demo and preview</Link>
         </li>
       </ul>
 
